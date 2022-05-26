@@ -1,0 +1,46 @@
+class Solution {
+public:
+    // We cannot have brute force approach
+    // Similar to minimum number of moves to move from source to target thus bfs is used
+    // Here two possible rotations are possible clockwise and anticlockwise 
+    // You need not to consider deadends comes in between while traversing
+    //TC :O(V+E) same as bfs of graph containing v vertices and E edges;
+    int openLock(vector<string>& deadends, string target) {
+        set<int>s;
+        for(auto it:deadends)
+            s.insert(stoi(it));// All integrals value of string in int form are stored
+        queue<pair<int,int>> q;// Storing level and string in integer form
+        q.push({0,0});
+        vector<bool> vis(10000,false);
+        while(!q.empty()){
+           int v=q.front().first;
+           int level=q.front().second;
+            q.pop();
+            if(s.count(v))// alrready present in my deadends 
+                continue;
+            if(v==stoi(target))// when reached the string 
+                return level;
+            string curr="0000"+to_string(v);
+            while(curr.size()>4)
+                curr.erase(curr.begin());
+            for(int j=0;j<4;j++){
+                int num=curr[j]-'0';
+                int next=num==9?0:num+1;// checking for next
+                int prev=num==0?9:num-1;// checking for prev
+                string s1=curr;
+                string s2=curr;
+                s1[j]='0'+next;
+                s2[j]='0'+prev;
+                if(!vis[stoi(s1)]){
+                    vis[stoi(s1)]=true;
+                    q.push({stoi(s1),level+1});// clockwise
+                }
+                if(!vis[stoi(s2)]){
+                    vis[stoi(s2)]=true;
+                    q.push({stoi(s2),level+1});// anti-clockwise 
+                }
+            }
+        }
+        return -1;
+    }
+};
