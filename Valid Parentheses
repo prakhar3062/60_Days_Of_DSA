@@ -1,0 +1,21 @@
+//An input string is valid if:
+
+//1.Open brackets must be closed by the same type of brackets.
+//2.Open brackets must be closed in the correct order.
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> b;// to store  parenthesis in stack
+        for (char c:s){
+            if(c=='{'||c=='['||c=='(')
+                b.push(c);
+            else if(c=='}'&&!b.empty()&&b.top()=='{') b.pop();// popping parentesis which are valid according to question
+            else if(c==']'&&!b.empty()&&b.top()=='[') b.pop();
+            else if(c==')'&&!b.empty()&&b.top()=='(') b.pop();
+            else return false;
+        }
+       return b.empty(); // stack will be empty if string is valid
+    }
+        
+};
