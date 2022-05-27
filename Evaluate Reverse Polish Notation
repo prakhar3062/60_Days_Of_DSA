@@ -1,0 +1,41 @@
+// Normal :3+5=8
+//Rpn: 35+=8in 
+// Algo-: Here we will push the string tokens int form until an expression comes. As operators come we operate             the topmost value in the stack and push in it. At the end all expressions are evaulated thus the top will be final answer 
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> s;
+        for(int i=0;i<tokens.size();i++){
+            if(tokens[i]=="+"){
+                 int x=s.top();
+                 s.pop();
+                 int y=s.top();
+                 s.pop();
+                s.push(x+y);
+            }
+            else if(tokens[i]=="-"){
+                 int x=s.top();
+                 s.pop();
+                 int y=s.top();
+                 s.pop();
+                 s.push(y-x);// top will be evaulated from the second topmost 
+            }
+            else if(tokens[i]=="*"){
+                 int x=s.top();
+                 s.pop();
+                 int y=s.top();
+                 s.pop();
+                 s.push(x*y);
+            }
+            else if(tokens[i]=="/"){
+                 int x=s.top();
+                 s.pop();
+                int y=s.top();
+                s.pop();
+                s.push(y/x);
+            }else
+                s.push(stoi(tokens[i]));
+        }
+        return s.top();
+    }
+};
