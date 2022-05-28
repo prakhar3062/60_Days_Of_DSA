@@ -1,0 +1,27 @@
+// Here we can use both dfs and bfs 
+// But using bfs will be more optimized approach thus it's code will be here
+class Solution {
+public:
+    queue<int> q;
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n=rooms.size();
+        q.push(0);
+        vector<bool>visited(n,false);
+        visited[0]=true;
+       while(!q.empty()){
+           int room=q.front();
+           q.pop();
+           for(auto key :rooms[room]){
+               if(!visited[key]){
+                   visited[key]=true;
+                   q.push(key);
+               }
+           }
+         }
+       for(auto x:visited){
+           if(!x)
+               return x;
+       }
+      return true;
+    }
+};
