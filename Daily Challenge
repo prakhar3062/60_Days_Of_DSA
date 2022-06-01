@@ -1,0 +1,12 @@
+// We can also use another vector to store sum and return it as but that will increase space required thus here we are swapping nums[i] with prefix sum
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        int sum=0;
+        for(int i=0;i<nums.size();i++){
+          sum=sum+nums[i];
+          nums[i]=sum;  
+        }
+        return nums;
+    }
+};
