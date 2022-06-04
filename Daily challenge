@@ -1,12 +1,15 @@
-//Using prefix algorithm 
+// Here extra mat1 is increasing space required something needs to be done to reduce it 
 class Solution {
 public:
-    vector<int> runningSum(vector<int>& nums) {
-        int sum=0;
-        for(int i=0;i<nums.size();i++){
-          sum=sum+nums[i];
-          nums[i]=sum;  
+    vector<vector<int>> transpose(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+		int n = matrix[0].size();
+		vector<vector<int>> mat1(n, vector<int>(m,0));
+        for(int i=0;i<matrix[0].size();i++){
+            for(int j=0;j<matrix.size();j++){
+               mat1[i][j]=matrix[j][i];
+            }
         }
-        return nums;
+        return mat1;
     }
 };
