@@ -1,0 +1,24 @@
+// In preoder first element will be root of the tree and inorder root will be in between left subtree and right subtree. Do ths recursively you will make a tree
+// Also tyr to do the same form post and in
+// to reduce search time we are hashing preoredr
+
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        map<int,int> imap;
+        for(int i=0;i<inorder.size();i++){
+            imap[inorder[i]]=i;
+        }
+        TreeNode* root= buildTree(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1,imap);
+        return root;
+    }
+    TreeNode*buildTree(vector<int>& preorder,int prestart,int prend,vector<int>&inorder,int instart,int inend,map<int,int>& imap){
+        if(prestart>prend||instart>inend) return NULL;
+        TreeNode* root=new TreeNode(preorder[prestart]);
+        int iroot=imap[root->val];
+        int numsLeft=iroot-instart;
+        root->left=buildTree(preorder,prestart+1,prestart+numsLeft,inorder,instart,iroot-1,imap);
+        root->right=buildTree(preorder,prestart+numsLeft+1,prend,inorder,iroot+1,inend,imap) ;   
+        return root;
+    }
+};
