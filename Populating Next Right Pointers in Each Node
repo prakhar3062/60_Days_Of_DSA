@@ -1,0 +1,21 @@
+// perfect binary tree has either two child or no child node
+// Level Order traversal works here 
+// Idea from insertion sort that some portion of it is solved
+class Solution {
+public:
+    Node* connect(Node* root) {
+      Node* black=root;
+      while(black!=NULL && black->left!=NULL){
+          Node* n=black;
+          while(true){
+              n->left->next=n->right;
+              if(n->next==NULL)
+                  break;
+              n->right->next=n->next->left;
+              n=n->next;
+          }
+          black=black->left;
+      } 
+        return root;
+    }
+};
