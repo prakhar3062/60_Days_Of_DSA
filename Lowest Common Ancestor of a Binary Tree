@@ -1,0 +1,23 @@
+Brute Force Approach-:
+1)We are going to find path from root to p and q as path 1 and path2
+2) Then we found common element with max index i.e. lowest common acestor
+3) TC-: O(N) SC-:O(N)
+OPtimized Approach-:
+1) We will do dfs taversal
+2) Return Null if it has both root null else one of it which is not null else if both are not return root
+Code-:
+// Using DFS Approach
+// left and right returning root
+class Solution {
+public:
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL || root==p||root==q)
+            return root;
+        TreeNode* left=lowestCommonAncestor(root->left,p,q);
+        TreeNode* right=lowestCommonAncestor(root->right,p,q);
+        if(left==NULL) return right;
+        else if(right==NULL) return left;
+        else return root;
+    }
+};
