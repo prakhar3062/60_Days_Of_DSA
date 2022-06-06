@@ -1,0 +1,39 @@
+//Recursion
+class Solution {
+public:
+    void swaps(ListNode* temp1,ListNode* temp2){
+        swap(temp1->val,temp2->val);
+        if(temp1->next->next==NULL ||temp2->next->next==NULL){
+            return;
+        }
+        
+        swaps(temp1->next->next,temp2->next->next);
+    }
+    ListNode* swapPairs(ListNode* head) {
+        ListNode *temp1=head;
+        if(temp1==NULL||temp1->next==NULL) return head;
+        swaps(temp1,temp1->next);   
+        return head;
+    }
+};
+//Loop
+class Solution {
+public:
+    
+    ListNode* swapPairs(ListNode* head) {
+        ListNode *curr=head;
+        ListNode *prev=NULL;
+        ListNode *next=NULL;
+        int count=0;
+        while(curr && count<2){
+           next=curr->next;
+           curr->next=prev;
+           prev=curr;
+           curr=next;
+           count++;
+        }
+        if(next!=NULL)
+         head->next=swapPairs(next);
+        return prev;
+    }
+};
