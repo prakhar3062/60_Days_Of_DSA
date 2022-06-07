@@ -1,0 +1,20 @@
+//Using simple recursion, we are traversing the tree and finding the node and returning it
+class Solution {
+public:
+    TreeNode* search(TreeNode* root,int val){
+        if(root==NULL) 
+            return NULL;
+        if(root->val==val)
+            return root;
+        TreeNode* left=search(root->left,val);
+        TreeNode* right=search(root->right,val);
+        if(left==NULL) return right;
+        if(right==NULL) return left;
+        else return NULL;
+        
+    }
+    TreeNode* searchBST(TreeNode* root, int val) {
+        TreeNode* node=search(root,val);
+        return node;
+    }
+};
