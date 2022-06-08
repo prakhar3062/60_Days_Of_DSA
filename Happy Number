@@ -1,0 +1,23 @@
+class Solution {
+private:
+    
+public:
+    bool isHappy(int n) {
+        int ans;
+        if(n==1||n==7) return true;
+        while(n>9){
+            int k=n;
+            int s=0;
+            while(k){
+                int m=k%10;
+                s=s+(m*m);
+                k/=10;
+            }
+           n=s;
+            
+          if(n==1||n==7) return true;
+        }
+        
+      return false;
+    }
+};
