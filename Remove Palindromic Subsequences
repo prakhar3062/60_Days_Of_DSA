@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isPalindrome(string s){
+        int n=s.size();
+        for(int i=0;i<n/2;i++){
+            if(s[i]!=s[n-i-1])
+                return false;
+        }
+        return true;
+    }
+    int removePalindromeSub(string s) {
+        if(isPalindrome(s))
+            return 1;
+        return 2;
+    }
+};
+the string is not palindrome, the answer is 2, becuase:
+String s only consists of two characters 'a' and 'b',
+This implies, there always exists two different palindromic subsequence in the string, one consisting of all the a's and other consisting of all the b's.
+We just need to identify if there is a need to return 2 as a result or 1(in case of palindrome)
