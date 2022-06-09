@@ -1,0 +1,38 @@
+//Using hashmap
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> m;
+        vector<int>num;
+        
+        for(int i=0;i<(nums.size()-1);i++){
+           m.insert(make_pair(nums[i],i));      
+        }
+        for(int i=0;i<nums.size();i++){
+            int complement=target-nums[i];
+            if(m.count(complement)>0&& m[complement]!=i)
+            {
+                num.push_back(i);
+                
+            }
+        }
+       return num; 
+    }
+};
+// Using bruteforce approach
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> num;
+        for(int i=0;i<(nums.size()-1);i++){
+            for(int j=i+1;j<(nums.size());j++){
+            if((nums[i]+nums[j])==target){
+                 num.push_back(i);
+                num.push_back(j);
+             }
+            }     
+        }
+       return num; 
+    }
+};
+// Most optimized will be trying to implement hashmap in one pass 
