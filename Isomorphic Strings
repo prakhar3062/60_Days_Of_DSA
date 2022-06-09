@@ -1,0 +1,44 @@
+// character mapping with dicitionary
+//At this point, we expect both the character mappings to exist in the dictionaries and their values should be mapping_s_t[c1] = c2 and mapping_t_s[c2] = c1. 
+//If either of these conditions fails (c1 is not in the dictionary, c2 is not in the dictionary, unexpected mapping), we return false.
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        map<char,char> m1,m2;
+        for(int i=0;i<s.length();i++){
+            char c1=s[i];
+            char c2=t[i];
+            if(m1.count(c1)<=0 && m2.count(c2)<=0)
+            {      
+              m1.insert(make_pair(s[i],t[i]));
+              m2.insert(make_pair(t[i],s[i]));  
+            } 
+            else if(!(m1[c1]==c2 && m2[c2]==c1))
+                return false;
+        }
+       return true; 
+    }
+};
+//First Occurence transformation
+//For each character, we look up the mapping in the dictionary. 
+//If there is a mapping, that means this character already has its first occurrence recorded and we simply use the first occurrence's index in the new string. 
+//Otherwise, we use the current index for the first occurrence.
+class Solution {
+public:
+    string transform(string s){
+        map<char,int> m;
+        string res="";
+        for(int i=0;i<s.length();i++){
+            char c1=s[i];
+            if(m.count(c1)<=0)
+                m.insert(make_pair(c1,i));
+            res=res+to_string(m[c1]);
+        }
+        return res;
+            
+    }
+    bool isIsomorphic(string s, string t) {
+         
+        return transform(s)==transform(t);
+    }
+};
