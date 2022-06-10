@@ -12,3 +12,16 @@ public:
         return count;
     }
 };
+// using unordered set
+//substring concept
+void count_jewels(char j,string s,int& count){
+ if(s.length()==0)
+  return;
+ int x=s.find(j);
+ if(x>=0){
+  count++;
+   count_jewels(j, s.substr(x+1), count);
+ }
+ return;
+}
+//then call for each j[i] and return count
