@@ -1,0 +1,17 @@
+//       5(i,j)
+// (i+1,j)4   2(i,j-1)
+//                     0(i,j-2)
+// We can use recursion but it is not optimized
+// subarray of rest element 
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        TreeNode* t=new TreeNode(val);
+        if(!root) return t;
+        if(root->val<val)
+            root->right=root->right?insertIntoBST(root->right,val):t;
+        else
+            root->left=root->left?insertIntoBST(root->left,val):t;
+        return root;
+    }
+};
