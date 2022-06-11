@@ -1,0 +1,23 @@
+//O(n)
+class RandomizedSet {
+public:
+    vector<int> set;
+    unordered_set<int>m;
+    RandomizedSet() {
+        
+    }
+    
+    bool insert(int val) {
+       return (m.insert(val)).second;
+            
+    }
+    
+    bool remove(int val) {
+        return m.erase(val);
+        
+    }
+    
+    int getRandom() {
+        return *next(m.begin(),rand( )% m.size());
+    }
+};
