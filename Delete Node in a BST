@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int max(TreeNode* node){
+        if(node->right!=NULL)
+            return max(node->right);
+        else 
+            return node->val;
+    }
+    TreeNode* deleteNode(TreeNode* root, int data) {
+        if(root==NULL) return root;
+        else if(data<root->val) root->left=deleteNode(root->left,data);
+        else if(data>root->val) root->right=deleteNode(root->right,data);
+        else{
+            //work
+            if(root->left!=NULL && root->right!=NULL){
+                int lmax=max(root->left);
+                root->val=lmax;
+                root->left=deleteNode(root->left,lmax);
+                return root;
+            }
+            else if(root->left!=NULL){
+                return root->left;
+                
+                
+            }else if(root->right!=NULL){
+                return root->right;
+                
+            }
+            else{
+                return NULL;
+                
+            }
+            
+        }
+        return root;
+        
+    }
+};
