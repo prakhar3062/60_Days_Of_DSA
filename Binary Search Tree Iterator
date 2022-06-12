@@ -1,0 +1,25 @@
+// Brute Force-: TC-:O(n) SC-:O(n) inorder traversal vector and moving pointer in that array
+//at height h=log(n)
+class BSTIterator {
+public:
+    stack<TreeNode*> st;
+    BSTIterator(TreeNode* root) {
+        addAllLeft(root);
+    }
+    void addAllLeft(TreeNode* node){
+        while(node!=NULL){
+            st.push(node);
+            node=node->left;
+        }
+    }
+    int next() {
+        TreeNode* root=st.top();
+        st.pop();
+        addAllLeft(root->right);
+       return root->val; 
+    }
+    
+    bool hasNext() {
+        return st.size()!=0;
+    }
+};
