@@ -1,0 +1,56 @@
+class Solution {
+public:
+    bool isValid(int i, int j, vector<vector<char>> &maze){
+        if(i < 0 || i >= maze.size() || j < 0 || j >= maze[0].size()) return false;
+        
+        return true;
+    }
+    
+    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
+        queue<pair<int, int>> q;
+        
+        int n = maze.size();
+        int m = maze[0].size();
+        
+        int startX = entrance[0];
+        int startY = entrance[1];
+        
+        vector<vector<int>> directions = {
+            {0, 1}, {0, -1}, {1, 0}, {-1, 0}
+        };
+        
+        q.push({startX, startY});
+        
+        vector<vector<int>> dist(n, vector<int> (m, -1));
+        dist[startX][startY] = 0;
+        
+        while(!q.empty()){
+            int sz = q.size();
+            
+            for(int i = 0; i < sz; i++){
+                int x = q.front().first;
+                int y = q.front().second;
+                q.pop();
+                
+                for(auto dir : directions){
+                    int nX = x + dir[0];
+                    int nY = y + dir[1];
+                    
+                    if(isValid(nX, nY, maze) && maze[nX][nY] != '+' && dist[nX][nY] == -1){
+                        dist[nX][nY] = 1 + dist[x][y];
+                        q.push({nX, nY});
+                        if(nX == 0 || nX == n - 1 || nY == 0 || nY == m - 1){
+                            return dist[nX][nY];
+                        }
+                    }
+                }
+            
+            }
+        }
+        
+        if(q.empty()) return -1;
+        
+        return 0;
+    }
+
+};
