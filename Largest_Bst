@@ -1,0 +1,39 @@
+class Solution{
+    public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+    struct bst{
+        bool isBST;
+        int size;
+        int mx;
+        int mn;
+    };
+    bst large(Node *root){
+        if(!root){
+          bst b={
+              true,
+              0,
+              INT_MIN,INT_MAX
+          };
+        
+          return b;
+        }
+          bst l=large(root->left);
+          bst r=large(root->right);
+          bst b;
+          if(l.isBST && r.isBST && l.mx<root->data && r.mn>root->data)
+            bst b={
+                true,l.size+r.size+1,max(root->data,r.mx),min(root->data,l.mn)
+            };
+           else 
+              bst b={false ,max(l.size,r.size),-1,-1};
+              return b;
+    }
+    
+    int largestBst(Node *root)
+    {
+    	//Your code here
+    	bst b=large(root);
+    	return b.size;
+    }
+};
