@@ -5,4 +5,4 @@
 <p>For same problem, more than one solutions are available </p>
 <img src="https://assets.leetcode.com/users/images/7c180297-8978-4cea-9e5a-9550ab9b9b3a_1619416582.3089018.png" width=100% alt="">
 <p> Before making contribution read <i><strong>contribution.md file</strong></i> , it might be helpful for you</p>
-<p> If it helps you star the repository </p>
+<p> If it helps you in anyway , don't forget to star the repository </p>
